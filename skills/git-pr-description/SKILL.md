@@ -1,5 +1,5 @@
 ---
-name: Git PR Description
+name: git-pr-description
 description: Automatically generate a Pull Request Title and Description from the diff between the current branch and the target branch. Triggers when the user mentions "PR", "Pull Request", "write PR", "PR description", or "create PR".
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: Git Worktree Design
+name: git-worktree-design
 description: Automatically triggers when the user's requirements involve adding multiple features, or when it's suitable to split into multiple feature branches for parallel development, or when mentioning "worktree", "git worktree", "multi-branch development", or "parallel branches". First analyzes the requirements and proposes a worktree split plan, then executes the setup after user confirmation.
 ---
 

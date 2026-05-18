@@ -1,5 +1,5 @@
 ---
-name: Git Smart Commit
+name: git-smart-commit
 description: Automatically split messy git changes into multiple meaningful conventional commits grouped by functional logic
 ---
 
