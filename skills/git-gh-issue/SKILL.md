@@ -1,6 +1,6 @@
 ---
 name: git-gh-issue
-description: Automatically generate and create structured GitHub Issues from conversation context or code artifacts. Triggers when the user mentions "create an issue", "file an issue", "new issue", "report a bug", "open a GitHub issue", "gh issue", or "create issue from my changes". Also use when the user describes a bug, feature request, or task and wants it tracked on GitHub — even if they don't explicitly say "issue". This skill completes the git lifecycle: Issue → Worktree → Smart Commit → PR.
+description: Automatically generate and create structured GitHub Issues from conversation context or code artifacts. Triggers when the user mentions "create an issue", "file an issue", "new issue", "report a bug", "open a GitHub issue", "gh issue", or "create issue from my changes". Also use when the user describes a bug, feature request, or task and wants it tracked on GitHub — even if they don't explicitly say "issue". This skill completes the git lifecycle - `Issue → Worktree → Smart Commit → PR`.
 ---
 
 # Git GH Issue — Auto-generate and Create GitHub Issues
