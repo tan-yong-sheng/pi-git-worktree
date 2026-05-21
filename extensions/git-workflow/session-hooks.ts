@@ -3,6 +3,10 @@
  *
  * Injects git context at session start, re-injects after compaction
  * or mutating git commands — follows the rpiv-core pattern.
+ *
+ * Since custom git tools were removed (the LLM can use bash for
+ * git commands), the injected context includes a reminder that
+ * git CLI is available via bash.
  */
 import {
 	type ExtensionAPI,
@@ -32,10 +36,10 @@ export function registerSessionHooks(pi: ExtensionAPI): void {
 	pi.on("session_start", async (_event, ctx) => {
 		await onSessionStart(pi, ctx);
 	});
-	pi.on("session_compact", async (_event, ctx) => {
+	pi.on("session_compact", async () => {
 		await onSessionCompact(pi);
 	});
-	pi.on("tool_call", async (event, ctx) => {
+	pi.on("tool_call", async (event) => {
 		await onToolCall(event, pi);
 	});
 	pi.on("before_agent_start", async () => await onBeforeAgentStart(pi));
@@ -54,7 +58,9 @@ async function onSessionStart(
 	if (gitCtx) {
 		pi.sendMessage({
 			customType: MSG_TYPE_GIT_CONTEXT,
-			content: gitCtx,
+			content:
+				gitCtx +
+				"\n\nGit CLI is available via bash — use `!git <command>` for any git operation.",
 			display: false,
 		});
 	}
@@ -70,7 +76,9 @@ async function onSessionCompact(pi: ExtensionAPI): Promise<void> {
 	if (gitCtx) {
 		pi.sendMessage({
 			customType: MSG_TYPE_GIT_CONTEXT,
-			content: gitCtx,
+			content:
+				gitCtx +
+				"\n\nGit CLI is available via bash — use `!git <command>` for any git operation.",
 			display: false,
 		});
 	}
@@ -100,7 +108,9 @@ async function onBeforeAgentStart(
 	return {
 		message: {
 			customType: MSG_TYPE_GIT_CONTEXT,
-			content: gitCtx,
+			content:
+				gitCtx +
+				"\n\nGit CLI is available via bash — use `!git <command>` for any git operation.",
 			display: false,
 		},
 	};

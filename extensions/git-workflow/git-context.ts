@@ -1,44 +1,19 @@
 /**
- * Git context utilities — run git commands safely, return structured results.
+ * Git context utilities — async helpers for session hooks.
  *
- * Uses pi.exec (async, abort-aware) when called from event handlers,
- * falls back to execSync for tool execute functions where pi is not available.
+ * Uses pi.exec (async, abort-aware) to gather git context.
+ * All sync helpers (runGit, GitResult) removed — the LLM can
+ * run git commands directly via bash; no custom tools needed.
  */
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
-import { execSync } from "node:child_process";
-
-// ---------------------------------------------------------------------------
-// Sync helpers (used in tool execute — no access to pi.exec)
-// ---------------------------------------------------------------------------
-
-export type GitResult =
-	| { ok: true; stdout: string }
-	| { ok: false; error: string };
-
-const GIT_EXEC_TIMEOUT_MS = 30_000;
-
-export function runGit(args: string, cwd?: string): GitResult {
-	try {
-		const stdout = execSync(`git ${args}`, {
-			encoding: "utf-8",
-			timeout: GIT_EXEC_TIMEOUT_MS,
-			cwd,
-			stdio: ["pipe", "pipe", "pipe"],
-		});
-		return { ok: true, stdout: stdout.trim() };
-	} catch (err: any) {
-		return {
-			ok: false,
-			error: err?.stderr?.toString().trim() || err?.message || String(err),
-		};
-	}
-}
 
 // ---------------------------------------------------------------------------
 // Async helpers (used in session hooks — has access to pi.exec)
 // ---------------------------------------------------------------------------
 
 export type GitContext = { branch: string; commit: string; user: string };
+
+const GIT_EXEC_TIMEOUT_MS = 30_000;
 
 // Cache: undefined = not loaded yet, null = not a git repo / failed
 let cache: GitContext | null | undefined;
@@ -68,6 +43,7 @@ async function loadGitContext(pi: ExtensionAPI): Promise<GitContext | null> {
 
 		const rawBranch = branchRes.stdout.trim();
 		const commit = commitRes.stdout.trim();
+
 		if (!rawBranch && !commit) return null;
 
 		const branch = rawBranch === "HEAD" ? "detached" : rawBranch;

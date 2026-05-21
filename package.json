@@ -1,7 +1,7 @@
 {
   "name": "@tan-yong-sheng/pi-git-worktree",
   "version": "0.1.0",
-  "description": "Pi package: git workflow automation with smart commits, PR generation, and worktree design. Three skills, three prompt templates, and a TypeScript extension with custom tools and slash commands.",
+  "description": "Pi package: git workflow automation with smart commits, PR generation, and worktree design. Three skills, one prompt template, and a TypeScript extension with session hooks for git context injection.",
   "keywords": [
     "pi-package",
     "pi-extension"
@@ -41,7 +41,6 @@
   "peerDependencies": {
     "@earendil-works/pi-coding-agent": "*",
     "@earendil-works/pi-ai": "*",
-    "@earendil-works/pi-tui": "*",
-    "typebox": "*"
+    "@earendil-works/pi-tui": "*"
   }
 }
