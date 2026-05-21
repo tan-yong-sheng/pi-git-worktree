@@ -31,6 +31,10 @@ git status --short
 
 If there are uncommitted changes, remind the user to handle them first (commit or stash) before continuing.
 
+#### Spec File Hygiene
+
+Ensure `git-worktree-spec.md` is in `.gitignore` — spec files are local development guides, not repo artifacts. Then check if any `git-worktree-spec.md` already exists in a worktree directory: read it, compare its `Branch name` field against `git worktree list`, and if the branch no longer exists or has been merged, delete the stale spec. If the branch still exists but the spec is outdated, retain and update it rather than recreating from scratch.
+
 ---
 
 ### 2. Global Design (Split Plan + Feature Specs)
