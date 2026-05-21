@@ -27,6 +27,9 @@ git remote -v
 
 # Check working directory status
 git status --short
+
+# Fetch latest remote state (non-destructive, never modifies working directory — prefer fetch over pull)
+git fetch --all --prune && git log HEAD..@{upstream} --oneline 2>/dev/null && echo "⚠️ Local branch is behind remote — consider pulling before creating worktrees" || true
 ```
 
 If there are uncommitted changes, remind the user to handle them first (commit or stash) before continuing.
@@ -228,7 +231,6 @@ Display the results in table format:
 - **Branch already exists**: When a branch is detected as existing, use the command without `-b` (`git worktree add <path> <existing-branch>`), and prompt the user to confirm
 - **Directory already exists**: Indicate the conflict and suggest an alternative directory name
 - **Uncommitted changes**: Remind the user to commit or stash first
-- **Remote branch sync**: Suggest running `git fetch` first to get the latest remote state
 - **Worktree cleanup**: Remind the user to use `git worktree remove` and `git branch -d` for cleanup after development is complete
 
 ---
