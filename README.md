@@ -34,6 +34,67 @@ No custom tools are registered — the LLM uses bash for git operations directly
 
 > Prompt templates are **not** auto-triggered by the LLM — they are only invoked explicitly by the user (e.g., `/git-exec-worktree-spec`). This is intentional: skills handle the auto-triggerable workflows (PR generation, commit grouping, worktree design), while this prompt provides a manual-only execution workflow for worktree specs.
 
+## Recommended Workflow
+
+This package is designed around a three-step parallel development workflow:
+
+```
+/skill:git-worktree-design  →  Open agent in worktree  →  /git-exec-worktree-spec
+       Step 1                        Step 2                       Step 3
+    Design & split              Start coding              Execute the spec
+```
+
+### Step 1: Design the Split
+
+In your **main project** session, invoke the worktree design skill:
+
+```
+/skill:git-worktree-design
+```
+
+Describe your requirements (e.g. "I need a hero redesign, pricing page, and testimonials section"). The skill will:
+
+1. Analyze your repo state and existing worktrees
+2. Propose a split plan with branch names, worktree directories, and feature specs
+3. Wait for your confirmation, then create the worktrees and write `git-worktree-spec.md` into each one
+
+### Step 2: Open a Session in Each Worktree
+
+For each worktree created in Step 1, open a new Pi session in that directory:
+
+```bash
+# From your terminal — navigate to the worktree and start Pi
+cd ../project-hero && pi
+
+# Or from within an existing Pi session, use the session switch:
+# Ctrl+N → navigate to the worktree directory
+```
+
+Each worktree is an independent working directory with its own `node_modules` (installed in Step 1). The extension's session hooks will automatically detect the new branch and inject fresh git context.
+
+### Step 3: Execute the Feature Spec
+
+In the worktree session, invoke the spec executor:
+
+```
+/git-exec-worktree-spec
+```
+
+This is a **prompt template** (not a skill), so it only runs when you explicitly invoke it. The agent will:
+
+1. Read `git-worktree-spec.md` from the worktree root
+2. Execute each checklist item in Implementation Scope one by one
+3. Mark completed items as `[x]` in the spec file
+4. Validate results against Acceptance Criteria
+
+### When You're Done
+
+Back in your main project session:
+
+- Use `/skill:git-pr-description` to generate PR descriptions for completed worktrees
+- Use `/skill:git-smart-commit` to group and commit any remaining changes
+- Clean up merged worktrees with `git worktree remove <path>`
+
 ## Installation
 
 ```bash
