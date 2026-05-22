@@ -49,7 +49,7 @@ Present the **full plan** as a markdown code block **only in the chat interface*
 Once approved:
 1. **Worktree Creation**: Execute `git worktree add` for all branches in one sequence.
 2. **Initialization**: Detect package manager (e.g., `pnpm-lock.yaml`); run install for each.
-3. **Documentation**: Write the grounded `git-worktree-spec.md` to the root of each worktree.
+3. **Documentation**: Write the `git-worktree-spec.md` to the root of each worktree, **strictly populating all fields** defined in section 2b (Source Reference, Goal, Requirements, etc.).
 4. **Verification**: List all worktrees and confirm status in a summary table.
 
 ### 3. Execution
