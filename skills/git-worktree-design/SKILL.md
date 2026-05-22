@@ -32,12 +32,14 @@ Based on requirements AND the synthesized context, split into independent work b
 - **Semantic naming**: `branch/<task-name>` (e.g., `feature/...`, `refactor/...`, `fix/...`).
 
 #### 2b. Design Each Worktree Spec
-Populate specs with project-specific paths/patterns.
+Populate specs with rich, self-contained requirements fetched during the research phase.
 
 | Section | Description |
 |---|---|
+| **Source Reference** | Explicit GitHub URL (for tracking) |
 | **Goal** | Task purpose |
-| **Implementation Scope** | Task checklist with concrete file references |
+| **Requirements** | **Comprehensive summary** of issue/research context (Do not rely on live links) |
+| **Implementation Scope** | Task checklist with **explicit file paths** |
 | **Acceptance Criteria** | Testable behaviors/outcomes |
 | **Technical Constraints** | Conventions, interfaces |
 | **Cross-branch Notes** | Dependency/Merge order |
