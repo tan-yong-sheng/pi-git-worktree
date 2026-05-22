@@ -48,6 +48,6 @@ Populate specs with project-specific paths/patterns.
 - **Worktree Creation**: 
     - `git worktree add -b <branch_name> <worktree_path>`
     - Use `../<project-name>-<feature-short-name>` for paths.
-- **Initialization**: Detect existing lockfile to choose package manager; suggest `pnpm` if absent for efficiency.
+- **Initialization**: Detect package manager via lockfile (e.g., `pnpm-lock.yaml` for Node/TS); suggest efficient alternatives (like `pnpm`) if absent.
 - **Documentation**: Write the grounded `git-worktree-spec.md` to the root of each worktree.
 - **Verification**: List worktrees to confirm status.
