@@ -48,6 +48,6 @@ Populate specs with project-specific paths/patterns.
 - **Worktree Creation**: 
     - `git worktree add -b <branch_name> <worktree_path>`
     - Use `../<project-name>-<feature-short-name>` for paths.
-- **Initialization**: Install dependencies per-worktree (`package_manager install`).
+- **Initialization**: Run `pnpm install` (preferred for disk/speed efficiency) or the detected project package manager.
 - **Documentation**: Write the grounded `git-worktree-spec.md` to the root of each worktree.
 - **Verification**: List worktrees to confirm status.
