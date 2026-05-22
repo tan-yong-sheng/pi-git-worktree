@@ -43,7 +43,7 @@ For every branch, **auto-derive** a comprehensive spec file.
 | **Cross-branch Notes** | Dependency/Merge order |
 
 #### 2c. Present Global Plan
-Present the **full plan** as a markdown code block **only in the chat interface** for review. **Do not create roadmap files in the repository.** If persistence is required, write the plan to `/tmp/ROADMAP_PLAN.md` only. Request confirmation for the entire roadmap before initiating any operations.
+Present the **full plan** as a markdown code block **only in the chat interface** for review. **Do not create roadmap files in the repository.** If persistence is required, write the plan to `/tmp/git-worktree-design.md` only. Request confirmation for the entire roadmap before initiating any operations.
 
 ### 3. Execution (Batch)
 Once approved:
