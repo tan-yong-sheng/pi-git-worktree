@@ -26,7 +26,7 @@ import {
 // ---------------------------------------------------------------------------
 
 const MSG_TYPE_GIT_CONTEXT = "pi-git-worktree:git-context";
-const MSG_LOADED = "pi-git-worktree extension loaded";
+// MSG_LOADED removed — extension now loads silently
 
 // ---------------------------------------------------------------------------
 // Registration
@@ -64,9 +64,8 @@ async function onSessionStart(
 			display: false,
 		});
 	}
-	if (ctx.hasUI) {
-		ctx.ui.notify(MSG_LOADED, "info");
-	}
+	// Notification hidden — extension loads silently; git context is
+	// injected via display:false messages instead.
 }
 
 async function onSessionCompact(pi: ExtensionAPI): Promise<void> {
